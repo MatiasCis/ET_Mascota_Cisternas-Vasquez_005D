@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario contacto</title>
+    {% load static %} 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <!-- jQuery library -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+    <!-- Popper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <link rel="stylesheet" type="text/css" href="css/cssFormContacto.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>  
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
+    <link rel="stylesheet" href="{% static 'css/cssFormContacto.css' %}">
+    
+
+    <script>
+        $(function() 
+{
+  $("#mi-formulario").validate({
+       rules: {
+              nombre: "required",
+              email: {
+                  required: true,
+                  email: true
+              },
+          }, //rules
+      messages: {
+          nombre: {
+                required: 'Ingresa nombre',
+                minlength: 'Caracteres insuficientes'
+            },
+          correo: {
+              required: 'Ingresa tu correo electrónico',
+              email: 'Formato de correo no válido'
+          },
+          
+      }//messages
+  }); //$('#mi-formulario').validate
+}); //function
+</script>
+
+<script>
+
+function CambiarMayusculas()
+  {
+      var a = document.getElementById('nombre');
+      a.value = a.value.toUpperCase();
+  }
+function Mover(obj)
+
+
+  {
+      obj.innerHTML="Gracias por completar nuestro formulario de contacto!";
+      obj.style.background="#E5D40F";
+     
+  }
+
+  function MoverFuera(obj)
+  {
+      obj.innerHTML="Mueve el mouse aquí";
+      obj.style.background= "white";
+      
+  }
+  function CambiaColor(a)
+  {
+      a.style.background ="#E5D40F";
+  }
+</script>
+
+</head>
+
+
+<body> 
+  {% load static %}  
+  <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#opciones">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <!-- logo -->
+    <a class="navbar-brand" href="#">
+      <img src="{% static 'img/logo3.png' %}" width="50" height="50" alt="">
+    </a>
+    
+    <!-- enlaces -->
+    <div class="collapse navbar-collapse" id="opciones">   
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'index' %}">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'somos' %}">Quienes Somos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'galeria' %}">Galeria</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'FormReg' %}">Formulario de registro</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'FormCont' %}">Formulario de contacto</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'Api' %}">Api de feriados</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'seguimiento' %}">Seguimiento</a>
+      </li>
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'Compras' %}">Carrito</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'mostrarCompras' %}">Mostrar compras</a>
+        </li>
+
+        {% else  %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'formCliente' %}">Crear Cliente</a>
+        </li>
+      <li>
+        {% endif %}
+        
+        {% if user.is_superuser %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'formProducto' %}">Crear Producto</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'formCliente' %}">Crear Cliente</a>
+        </li>
+        {% endif %}
+
+        {% if user.is_authenticated %}
+       <!-- <a href="{% url 'index' %}" class="btn btn-success">Redireccionando a pagina principal</a>--> 
+    
+        <a href="{%  url 'logout' %}" class="btn btn-primary">Cerrar Sesión</a>
+
+        <a href="#">Bienvenido @{{user.username}}</a>
+    {% else %} 
+        <a href="{% url 'login' %}" class="btn btn-primary">Iniciar Sesión</a>
+    {% endif %}
+      </li>
+      </ul>
+    </div>
+  </nav>
+
+
+      <h1>Formulario de contacto</h1>
+      <div id="caja">
+          <form id="mi-formulario" action="index.html" method="post">
+              <label>Nombre: </label>
+              <input class="form-control" type="text" name="nombre"  id="nombre" minlength="3"  required placeholder="Ingrese su nombre" onchange="CambiarMayusculas()" >
+  
+          <br>
+              <label>Correo Electrónico: </label>
+              <input class="form-control" type="email" name="correo"  required placeholder="nombre@dominio.cl" onfocus="CambiaColor(this)" >
+          <br><br>
+          <label for="nom">Comentario:</label>
+          <textarea class="form-control" name="nom" id="nom" cols="6" rows="8" placeholder="Digite un comentario"> </textarea>
+  
+              <br><button>Enviar</button> 
+            </form>
+        <br><br>
+      </div>
+  
+      <div >
+  
+        <div onmouseover="Mover(this)" onmouseout="MoverFuera(this)" 
+                style=" width: margin-left auto; height: 100px; text-align: center;">
+                Mueve el mouse aquí
+        </div>
+  
+      </div>
+
+
+
+
+
+      <div>
+        <footer class="bg-dark text-center text-white">
+          <div class="container p-4 pb-0">
+            <section class="mb-4">
+              <!--  facebook -->
+              <a class="btn btn-outline-light btn-floating m-1" href="https://www.facebook.com/" role="button"
+                ><i class="fab fa-facebook-f"><img src="{% static 'img/logoface.png' %}" width="30px"></i
+              ></a>
+              <!-- instagram -->
+              <a class="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com/" role="button"
+                ><i class="fab fa-instagram"><img src="{% static 'img/logoing.png' %}" width="30px"></i></a>
+                <!-- twitter -->
+              <a class="btn btn-outline-light btn-floating m-1" href="https://twitter.com/" role="button"
+                ><i class="fab fa-twitter"><img src="{% static 'img/logotwitt.png' %}" width="30px"></i
+              ></a>
+          </div>
+          <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+            Matias Cisternas--Sebastian Vasquez
+            <br>
+            © 2022 Copyright:
+          </div>
+        </footer>
+      </div>
+</body>
+</html>

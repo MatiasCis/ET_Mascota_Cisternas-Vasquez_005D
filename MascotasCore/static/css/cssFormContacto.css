@@ -1,0 +1,36 @@
+#caja{
+    margin-top:30px;
+    margin-left:15px;
+    margin-right: 100px;
+}
+
+
+input {
+    width: 200px;
+    margin-bottom: 10px;
+}
+
+label {
+    clear: both;
+    float: left;
+    width: 180px;
+}
+
+button {
+    
+    clear: both;
+    float: left;
+    width: 100px;
+}
+
+.error-control {
+    border: 1px solid red;
+}
+
+label.error {
+    color: red;
+    width: 300px;
+    font-size: 0.8em;
+    margin-top: -5px;
+    margin-bottom: 10px;
+}
