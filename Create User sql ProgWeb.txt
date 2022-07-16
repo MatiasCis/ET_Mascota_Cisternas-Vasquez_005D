@@ -1,0 +1,3 @@
+create user c##examen identified by examen;
+grant connect, resource to c##examen;
+alter user c##examen default tablespace users quota unlimited on users;

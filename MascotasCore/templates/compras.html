@@ -83,7 +83,7 @@
       </ul>
     </div>
   </nav>
-      
+      <br>
       {% for co in productos %}
         <h1 class="card-text">
         <div class="container" id="cartas">
@@ -99,7 +99,7 @@
                         <h1 class="card-text">
                             <p class="card-text">
                                 Precio: ${{co.precio}} <br>
-                                Marca: {{co.marca}} <br>
+                                Stock: {{co.stock}} <br>
                                 Fecha de fabricacion: {{co.fechaFabricacion}} <br>
                                 {% if co.imagen %}
                                   <img src="{{ co.imagen.url }}" width="100px" height="100px">

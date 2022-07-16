@@ -32,7 +32,7 @@ class Venta(models.Model):
     fch_compra = models.CharField(max_length=40)
     fch_entrega = models.CharField(max_length=40,blank=True, null=True)
     idUser=models.ForeignKey(User,on_delete=models.SET_NULL,null=True)
-
+    
 
 
     
